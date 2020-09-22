@@ -174,6 +174,5 @@ public class LoginPage extends BaseClass {
 
     public void logOutAssertion(){
         Assert.assertTrue(continueBtn.isDisplayed());
-     //   System.out.println("Logout assertion is passed...");
     }
 }
