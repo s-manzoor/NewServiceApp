@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <listeners>
+         <listener class-name="Common.AnnotationTransformer"/>
+    </listeners>
+
+    <test verbose="2" preserve-order="true" name="D:/Automation/IDSServiceAutomationPractice">
+        <classes>
+            <class name="Tests.LoginTests">
+                <methods>
+                    <include name="invalidLogin01"/>
+                    <include name="invalidLogin02"/>
+                    <include name="invalidLogin03"/>
+                    <include name="validLogin"/>
+                    <include name="logOut"/>
+                    <include name="reLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
