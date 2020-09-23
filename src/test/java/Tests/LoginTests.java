@@ -59,7 +59,7 @@ public class LoginTests extends BaseClass {
   loginPage.passwordSet(password);
   test.pass("Enter password: "+password);
   loginPage.loginBtnClick();
-  test.pass("Click on Continue button");
+  test.pass("Click on Login button");
   loginPage.popupWait();
   loginPage.forcedLoginNo();
   loginPage.popupWait();
@@ -72,17 +72,17 @@ public class LoginTests extends BaseClass {
 
  @Test(description = "Invalid login without selecting Debug mode")
  public void invalidLogin01() {
-  ExtentTest test1 = extent.createTest("inValid Login01", "This is extent Report results for invalid Login without selecting Debbug mode Test case");
-  test1.log(Status.INFO, "invalid login without selecting debug mode test case is starting");
+ // ExtentTest test1 = extent.createTest("inValid Login01", "This is extent Report results for invalid Login without selecting Debbug mode Test case");
+ // test1.log(Status.INFO, "invalid login without selecting debug mode test case is starting");
 
   loginPage = new LoginPage(driver);
   loginPage.emailSet(email);
-  test1.pass("Input your G2 email address: " +email);
+ // test1.pass("Input your G2 email address: " +email);
   loginPage.continueBtnClick();
-  test1.pass("Click on Continue button");
+ // test1.pass("Click on Continue button");
   loginPage.loginPopup();
-  test1.pass("Tap on Ok button to close the popup message");
-  test1.log(Status.INFO,"Invalid Login without selecting Debug mode is completed");
+//  test1.pass("Tap on Ok button to close the popup message");
+//  test1.log(Status.INFO,"Invalid Login without selecting Debug mode is completed");
  }
 
  @Test(description = "invalid login with wrong email")

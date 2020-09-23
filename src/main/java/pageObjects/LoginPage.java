@@ -2,6 +2,8 @@ package pageObjects;
 
 
 import Common.BaseClass;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -17,6 +19,7 @@ import java.util.List;
 public class LoginPage extends BaseClass {
 
     private ServicePage servicePage = new ServicePage(driver);
+    ExtentTest test1 = extent.createTest("Login Tests", "This is extent Report results");
 
     public LoginPage(AppiumDriver driver) {
 //        public LoginPage(AndroidDriver driver) {
@@ -71,6 +74,7 @@ public class LoginPage extends BaseClass {
 
     public void emailSet(String email) {
         emailBox.clear();
+        test1.pass("Enter your G2 email: "+ email);
         emailBox.sendKeys(email);
     }
 
@@ -80,6 +84,7 @@ public class LoginPage extends BaseClass {
     }
 
     public void continueBtnClick() {
+        test1.pass("Click on Continue button");
         continueBtn.click();
     }
 
@@ -113,6 +118,7 @@ public class LoginPage extends BaseClass {
     }
 
     public void loginPopup() {
+        test1.pass("Click on OK");
         loginErrorPopupOK.click();
     }
 
