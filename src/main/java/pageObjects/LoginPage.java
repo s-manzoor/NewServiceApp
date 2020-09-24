@@ -9,6 +9,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -149,6 +150,7 @@ public class LoginPage extends BaseClass {
     public void passwordError(){
         loginErrorPopupOK.click();
     }
+
     public void logOut(){
         logOutMenu.click();
         // TODO: not working due to OS 7 splash activity issue
@@ -157,6 +159,49 @@ public class LoginPage extends BaseClass {
         logOutMenu.click()*/
         logOutYes.click();
     }
+
+    public boolean logIn(String email, String password) throws InterruptedException {
+        emailSet(email);
+        checkRememberMe();
+        debugBtnTap();
+        enableDebugModeClick();
+        environmentsDropDownClick();
+        MBQA3Selection();
+        continueBtnClick();
+//        Thread.sleep(3000);
+        passwordScreenWait();
+        passwordSet(password);
+        loginBtnClick();
+        Thread.sleep(5000);
+        loginPopup();
+        Thread.sleep(5000);
+        try {
+           // loginAssertion();
+            System.out.println("LogIn method is called and passed.");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Unable to login and quiting the tests");
+            driver.close();
+        }
+        return IsSession_Logged_In();
+    }
+
+    public boolean IsSession_Logged_In()
+    {
+       // return (servicePage.IsObjExist(fetch_elements.GetObj("xpath", "//*[starts-with(@class, 'Header_title')]")));
+    try {
+        servicePage.WOMenu.isDisplayed();
+    }
+    catch (NoSuchElementException e){
+        return false;
+    }
+    return true;
+
+       /*     ((servicePage.WOMenu).isDisplayed())
+        return (servicePage.WOMenu).isDisplayed();*/
+    }
+
 
     public void passwordScreenWait(){
         WebDriverWait wait = new WebDriverWait(driver,20);
@@ -175,8 +220,8 @@ public class LoginPage extends BaseClass {
 
     public void loginAssertion(){
         Assert.assertTrue(servicePage.WOMenu.isDisplayed());
-       // System.out.println("Login Assertion is passed...");
-     }
+        // System.out.println("Login Assertion is passed...");
+    }
 
     public void logOutAssertion(){
         Assert.assertTrue(continueBtn.isDisplayed());

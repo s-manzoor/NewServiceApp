@@ -56,6 +56,23 @@ public class LoginTests extends BaseClass {
   ExtentTest test = extent.createTest("Valid Login", "This is extent Report results for valid Login Test case");
   test.log(Status.INFO, "valid login test cases is starting");
   loginPage = new LoginPage(driver);
+
+  loginPage.emailSet(email);
+  test.pass("Entet user G2 email: "+ email);
+  loginPage.debugBtnTap();
+  test.pass("Tap on Settings icon");
+  loginPage.enableDebugModeClick();
+  test.pass("Enable debug mode");
+  loginPage.environmentsDropDownClick();
+  test.pass("Tap on environment options drop down");
+  loginPage.MBQA3Selection();
+  test.pass("Select MBQA3 dropdown option");
+  loginPage.checkRememberMe();
+  test.pass("Check RememberMe checkbox");
+  loginPage.continueBtnClick();
+  test.pass("Tap on Continue button");
+  loginPage.passwordScreenWait();
+
   loginPage.passwordSet(password);
   test.pass("Enter password: "+password);
   loginPage.loginBtnClick();
@@ -132,6 +149,17 @@ public class LoginTests extends BaseClass {
  public void logOut() throws Exception {
   ExtentTest test4 = extent.createTest("Logout", "This is extent report results for logout test case");
   loginPage = new LoginPage(driver);
+
+ // loginPage.logIn(email,password);
+  if (loginPage.IsSession_Logged_In() == false)
+  {
+   System.out.println("User needs to login");
+   loginPage.logIn(email,password);
+  }
+  else {
+   System.out.println("User is already loggedIn");
+  }
+
   loginPage.logOut();
   test4.pass("Tap on Logout link and Confirm the option with Yes");
   loginPage.logOutAssertion();
