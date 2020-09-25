@@ -133,6 +133,7 @@ public class LoginPage extends BaseClass {
             if (forcedLoginNo.isDisplayed()) {
                 forcedLoginNo.click();
                 loginButton.click();
+                System.out.println("Testing");
             }
         }
         catch (Exception e) {
