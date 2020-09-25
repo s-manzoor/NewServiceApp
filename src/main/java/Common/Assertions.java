@@ -18,7 +18,7 @@ public class Assertions extends BaseClass {
 
     public void loginAssertion(){
         Assert.assertTrue(servicePage.WOMenu.isDisplayed());
-        
+        System.out.println("LoginAssertion");
     }
 
     public void logOutAssertion(){
