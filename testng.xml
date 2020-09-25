@@ -10,10 +10,9 @@
             <class name="Tests.LoginTests">
                 <methods>
 
-<!--                <include name="invalidLogin01"/>
-                    <include name="invalidLogin02"/>
-                    <include name="invalidLogin03"/>-->
-
+                   <include name="invalidLogin01"/>
+                   <include name="invalidLogin02"/>
+<!--                   <include name="invalidLogin03"/>-->
                    <include name="validLogin"/>
                    <include name="logOut"/>
                    <include name="reLogin"/>

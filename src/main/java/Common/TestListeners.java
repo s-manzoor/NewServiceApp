@@ -71,6 +71,7 @@ public class TestListeners extends Common.BaseClass implements ITestListener {
     public void onTestSuccess(ITestResult Result)
     {
         System.out.println("The name of the testcase passed is :"+Result.getName());
+
         ExtentTest test1 = extent.createTest(Result.getName()+" Test", "This will test "+Result.getName() + " Test case");
         test1.log(Status.INFO, "Starting " + Result.getName()+ " test case");
         test1.pass("Testcase: " +Result.getName()+ " is passed");

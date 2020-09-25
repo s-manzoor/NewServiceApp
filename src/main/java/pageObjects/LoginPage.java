@@ -2,6 +2,7 @@ package pageObjects;
 
 
 import Common.BaseClass;
+import Common.PropertyManager;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import io.appium.java_client.AppiumDriver;
@@ -19,8 +20,12 @@ import java.util.List;
 
 public class LoginPage extends BaseClass {
 
+    PropertyManager PM;
+    String email = PM.getInstance().getEmail();
+    String password = PM.getInstance().getPassword();
+
     private ServicePage servicePage = new ServicePage(driver);
-    ExtentTest test1 = extent.createTest("Login Tests", "This is extent Report results");
+    ExtentTest test3;
 
     public LoginPage(AppiumDriver driver) {
 //        public LoginPage(AndroidDriver driver) {
@@ -31,7 +36,7 @@ public class LoginPage extends BaseClass {
     MobileElement emailBox;
 
     @AndroidFindBy(accessibility = "login-continue-btn")
-    MobileElement continueBtn;
+    public MobileElement continueBtn;
 
     @AndroidFindBy(accessibility = "login-checkbox-remember-me")
     MobileElement rememberMe;
@@ -52,13 +57,13 @@ public class LoginPage extends BaseClass {
     MobileElement QA3;
 
     @AndroidFindBy(accessibility = "login-password")
-    MobileElement userPassword;
+    public MobileElement userPassword;
 
     @AndroidFindBy(accessibility = "login-back")
     MobileElement backBtn;
 
     @AndroidFindBy(accessibility = "popup-btn-0")
-    MobileElement loginErrorPopupOK; // forcedLoginYes
+    public MobileElement loginErrorPopupOK; // forcedLoginYes
 
     @AndroidFindBy(accessibility = "popup-btn-1")
     MobileElement forcedLoginNo;
@@ -75,7 +80,7 @@ public class LoginPage extends BaseClass {
 
     public void emailSet(String email) {
         emailBox.clear();
-        test1.pass("Enter your G2 email: "+ email);
+      //  test3.log(Status.INFO, "Enter your G2 email: "+ email);
         emailBox.sendKeys(email);
     }
 
@@ -85,7 +90,7 @@ public class LoginPage extends BaseClass {
     }
 
     public void continueBtnClick() {
-        test1.pass("Click on Continue button");
+      //  test1.log(Status.INFO, "Click on Continue button");
         continueBtn.click();
     }
 
@@ -119,7 +124,7 @@ public class LoginPage extends BaseClass {
     }
 
     public void loginPopup() {
-        test1.pass("Click on OK");
+       // test1.pass("Click on OK");
         loginErrorPopupOK.click();
     }
 
@@ -139,7 +144,6 @@ public class LoginPage extends BaseClass {
         try {
             if (loginErrorPopupOK.isDisplayed()) {
                 loginErrorPopupOK.click();
-                loginButton.click();
             }
         }
         catch (Exception e) {
@@ -151,79 +155,14 @@ public class LoginPage extends BaseClass {
         loginErrorPopupOK.click();
     }
 
-    public void logOut(){
+    public void logOutMenuClick(){
         logOutMenu.click();
-        // TODO: not working due to OS 7 splash activity issue
-       /* logOutNo.click()
-        Thread.sleep(3000)
-        logOutMenu.click()*/
+    }
+    public void logOutNo(){
+        logOutNo.click();
+    }
+    public void logOutYes(){
         logOutYes.click();
     }
 
-    public boolean logIn(String email, String password) throws InterruptedException {
-        emailSet(email);
-        checkRememberMe();
-        debugBtnTap();
-        enableDebugModeClick();
-        environmentsDropDownClick();
-        MBQA3Selection();
-        continueBtnClick();
-//        Thread.sleep(3000);
-        passwordScreenWait();
-        passwordSet(password);
-        loginBtnClick();
-        Thread.sleep(5000);
-        loginPopup();
-        Thread.sleep(5000);
-        try {
-           // loginAssertion();
-            System.out.println("LogIn method is called and passed.");
-        }
-        catch (Exception e)
-        {
-            System.out.println("Unable to login and quiting the tests");
-            driver.close();
-        }
-        return IsSession_Logged_In();
-    }
-
-    public boolean IsSession_Logged_In()
-    {
-       // return (servicePage.IsObjExist(fetch_elements.GetObj("xpath", "//*[starts-with(@class, 'Header_title')]")));
-    try {
-        servicePage.WOMenu.isDisplayed();
-    }
-    catch (NoSuchElementException e){
-        return false;
-    }
-    return true;
-
-       /*     ((servicePage.WOMenu).isDisplayed())
-        return (servicePage.WOMenu).isDisplayed();*/
-    }
-
-
-    public void passwordScreenWait(){
-        WebDriverWait wait = new WebDriverWait(driver,20);
-        wait.until(ExpectedConditions.visibilityOf(userPassword));
-    }
-
-    public void popupWait(){
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.visibilityOf(loginErrorPopupOK));
-    }
-
-    public void serviceScreenWait(){
-        WebDriverWait wait = new WebDriverWait(driver,20);
-        wait.until(ExpectedConditions.visibilityOf(servicePage.WOMenu));
-    }
-
-    public void loginAssertion(){
-        Assert.assertTrue(servicePage.WOMenu.isDisplayed());
-        // System.out.println("Login Assertion is passed...");
-    }
-
-    public void logOutAssertion(){
-        Assert.assertTrue(continueBtn.isDisplayed());
-    }
 }

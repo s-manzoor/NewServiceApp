@@ -23,11 +23,13 @@ public class BaseClass {
     DesiredCapabilities dc = new DesiredCapabilities();
     private PropertyManager PM;
     ExtentHtmlReporter htmlReporter;
+    ExtentReports report;
     public static ExtentReports extent;
 
 
     @BeforeClass
     public void setUp() throws MalformedURLException {
+  //      report = new ExtentReports(System.getProperty("user.dir"));
         htmlReporter = new ExtentHtmlReporter("ExtentReportResults.html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
