@@ -34,12 +34,12 @@ public class PropertyManager {
     public void loadData(){
         Properties property = new Properties();
         try {
-            property.load(new FileInputStream("D:\\Automation\\IDSServiceAutomationPractice\\src\\main\\resources\\configuration.properties"));
+            property.load(new FileInputStream("D:\\Automation\\ServiceAppGitCode\\src\\main\\resources\\QA40.properties"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Configuration properties file cannot be found");
         }
-        //Get properties from configuration.properties
+        //Get properties from QA94.properties
         baseURL = property.getProperty("URL");
         userEmail = property.getProperty("Email");
         userPassword = property.getProperty("Password");

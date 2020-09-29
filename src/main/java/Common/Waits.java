@@ -20,7 +20,6 @@ public class Waits extends BaseClass {
     public void passwordScreenWait(){
         WebDriverWait wait = new WebDriverWait(driver,20);
         wait.until(ExpectedConditions.visibilityOf(loginPage.userPassword));
-        System.out.println("Test Message");
     }
 
     public void popupWait(){
